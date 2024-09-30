@@ -26,3 +26,10 @@ jobs:
         with:
           push: true
           tags: letranthienthang/devops:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: docker
+    steps:
+      - name: deploy
+        run: echo "Deploying to server"
