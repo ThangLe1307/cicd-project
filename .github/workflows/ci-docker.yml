@@ -33,6 +33,10 @@ jobs:
     steps:
       - name: deploy
         run: |
+          
+          echo "Secret message" | 
+          openssl enc -aes-256-cbc -base64 -salt -out secret.txt -k ${{ secrets.PRIVATE_KEY }}
+          |
           curl -X POST ${{ secrets.WEBHOOK_ENDPOINT }} \
           -H "Content-Type: application/json" \
-          -d '{"name":"test-api"}'
+          -d '{"data":"'"$(cat secret.txt)"'"}'
