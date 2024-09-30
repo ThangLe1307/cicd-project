@@ -36,6 +36,6 @@ jobs:
           SECRET_MESSAGE=$(echo "Secret message" | openssl enc -aes-256-cbc -base64 -salt -out secret.txt -k your_password -pbkdf2)
           
           
-          curl -X POST your_url_here \
+          curl -X POST ${{ secrets.WEBHOOK_ENDPOINT }} \
             -H "Content-Type: application/json" \
             -d '{"data":"'"$SECRET_MESSAGE"'"}'
